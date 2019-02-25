@@ -1,0 +1,5 @@
+---
+# This playbook configures dev machine
+- hosts: all
+  roles:
+  - role: dev
