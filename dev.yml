@@ -2,4 +2,5 @@
 # This playbook configures dev machine
 - hosts: all
   roles:
+  - role: google_test
   - role: dev

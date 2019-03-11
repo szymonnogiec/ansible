@@ -1,0 +1,48 @@
+---
+
+- name: Install a list of packages
+  apt:
+    update_cache: yes
+    state: present
+    name: "{{ gtestgmock_packages }}"
+  become: yes
+
+- name: Run cmake for googletest
+  shell:
+    cmd: cmake .
+    chdir: /usr/src/gtest
+  become: yes
+
+- name: Run make for googletest
+  shell:
+    cmd: make
+    chdir: /usr/src/gtest
+  become: yes
+
+- name: Copy gtest libs to usr lib
+  copy: src={{ item.src }} dest={{ item.dest }}
+  remote_src: yes
+  become: yes
+  with_items:
+    - { src: '/usr/src/gtest/libgtest.a', dest: '/usr/lib/libgtest.a' }
+    - { src: '/usr/src/gtest/libgtest_main.a', dest: '/usr/lib/libgtest_main.a' }
+
+- name: Run cmake for googlemock
+  shell:
+    cmd: cmake .
+    chdir: /usr/src/gmock
+  become: yes
+
+- name: Run make for googlemock
+  shell:
+    cmd: make
+    chdir: /usr/src/gmock
+  become: yes
+
+- name: Copy gmock libs to usr lib
+  copy: src={{ item.src }} dest={{ item.dest }}
+  remote_src: yes
+  become: yes
+  with_items:
+    - { src: '/usr/src/gmock/libgmock.a', dest: '/usr/lib/libgmock.a' }
+    - { src: '/usr/src/gmock/libgmock_main.a', dest: '/usr/lib/libgmock_main.a' }

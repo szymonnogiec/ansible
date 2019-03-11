@@ -1,0 +1,7 @@
+---
+
+gtestgmock_packages:
+- cmake
+- python
+- libgtest-dev
+- google-mock
