@@ -1,5 +1,50 @@
+- name: Add hstr repository
+  apt_repository:
+    repo: ppa:ultradvorka/ppa
+  become: yes
+
 - name: Update repositories cache and upgrade system
   apt:
     upgrade: dist
     update_cache: yes
   become: yes
+
+- name: Install common packages
+  apt:
+    name: "{{ dev_packages }}"
+  become: yes
+
+- name: Copy hstr configuration
+  shell: hstr --show-configuration >> ~/.bashrc
+
+- name: Cloning  oh-my-zsh
+  git:
+    repo: https://github.com/robbyrussell/oh-my-zsh
+    dest: ~/.oh-my-zsh
+
+- name: Change default shell to zsh
+  user:
+    name: "{{ ansible_user_id }}"
+    shell: /bin/zsh
+  become: true
+    
+- name: Copy .zshrc
+  copy:
+    src: .zshrc
+    dest: ~/.zshrc
+
+- name: Clone alias tips
+  git:
+    repo: https://github.com/djui/alias-tips.git
+    dest: ~/.oh-my-zsh/custom/plugins/alias-tips
+
+- name: Clone zsh-autosuggestions
+  git:
+    repo: https://github.com/zsh-users/zsh-autosuggestions
+    dest: ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+
+- name: Clone zsh-completions
+  git:
+    repo: https://github.com/zsh-users/zsh-completions
+    dest: ~/.oh-my-zsh/custom/plugins/zsh-completions
+

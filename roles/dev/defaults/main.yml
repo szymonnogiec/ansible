@@ -1,0 +1,19 @@
+---
+
+dev_packages:
+- terminator
+- zsh
+- git 
+- cmake
+- htop
+- openssh-server
+- python
+- python-pip 
+- build-essential
+- make
+- cmake
+- tlp
+- tlp-rdw
+- nmap
+- hstr
+- curl
