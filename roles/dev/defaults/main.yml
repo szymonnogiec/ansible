@@ -17,3 +17,6 @@ dev_packages:
 - nmap
 - hstr
 - curl
+- uswsusp  
+- pm-utils
+- gnome-tweaks
