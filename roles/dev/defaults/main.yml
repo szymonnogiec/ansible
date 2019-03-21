@@ -20,3 +20,4 @@ dev_packages:
 - uswsusp  
 - pm-utils
 - gnome-tweaks
+- shutter
